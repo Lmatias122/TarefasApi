@@ -23,8 +23,17 @@ public class CategoriaService
     {
         Categoria retorno = await _categoriaRepository.IncluirAsync(categoria);
 
-
         return retorno;
+    }
+
+    public async Task AlterarAsync(int id, Categoria categoria)
+    {
+        await _categoriaRepository.AlterarAsync(id, categoria);
+    }
+
+    public async Task ExcluirAsync(int id)
+    {
+        await _categoriaRepository.ExcluirAsync(id);
     }
 }
 

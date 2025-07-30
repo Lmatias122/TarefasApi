@@ -1,4 +1,3 @@
-C:\Estudos\TarefasApi\bin\Debug\net9.0\appsettings.Development.json
 C:\Estudos\TarefasApi\bin\Debug\net9.0\appsettings.json
 C:\Estudos\TarefasApi\bin\Debug\net9.0\TarefasApi.staticwebassets.endpoints.json
 C:\Estudos\TarefasApi\bin\Debug\net9.0\TarefasApi.exe
@@ -6,7 +5,6 @@ C:\Estudos\TarefasApi\bin\Debug\net9.0\TarefasApi.deps.json
 C:\Estudos\TarefasApi\bin\Debug\net9.0\TarefasApi.runtimeconfig.json
 C:\Estudos\TarefasApi\bin\Debug\net9.0\TarefasApi.dll
 C:\Estudos\TarefasApi\bin\Debug\net9.0\TarefasApi.pdb
-C:\Estudos\TarefasApi\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
 C:\Estudos\TarefasApi\bin\Debug\net9.0\Microsoft.OpenApi.dll
 C:\Estudos\TarefasApi\obj\Debug\net9.0\TarefasApi.csproj.AssemblyReference.cache
 C:\Estudos\TarefasApi\obj\Debug\net9.0\TarefasApi.GeneratedMSBuildEditorConfig.editorconfig
@@ -19,12 +17,6 @@ C:\Estudos\TarefasApi\obj\Debug\net9.0\scopedcss\bundle\TarefasApi.styles.css
 C:\Estudos\TarefasApi\obj\Debug\net9.0\staticwebassets.build.json
 C:\Estudos\TarefasApi\obj\Debug\net9.0\staticwebassets.development.json
 C:\Estudos\TarefasApi\obj\Debug\net9.0\staticwebassets.build.endpoints.json
-C:\Estudos\TarefasApi\obj\Debug\net9.0\staticwebassets\msbuild.TarefasApi.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Estudos\TarefasApi\obj\Debug\net9.0\staticwebassets\msbuild.TarefasApi.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
-C:\Estudos\TarefasApi\obj\Debug\net9.0\staticwebassets\msbuild.build.TarefasApi.props
-C:\Estudos\TarefasApi\obj\Debug\net9.0\staticwebassets\msbuild.buildMultiTargeting.TarefasApi.props
-C:\Estudos\TarefasApi\obj\Debug\net9.0\staticwebassets\msbuild.buildTransitive.TarefasApi.props
-C:\Estudos\TarefasApi\obj\Debug\net9.0\staticwebassets.pack.json
 C:\Estudos\TarefasApi\obj\Debug\net9.0\TarefasApi.csproj.Up2Date
 C:\Estudos\TarefasApi\obj\Debug\net9.0\TarefasApi.dll
 C:\Estudos\TarefasApi\obj\Debug\net9.0\refint\TarefasApi.dll
@@ -163,3 +155,13 @@ C:\Estudos\TarefasApi\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Workspaces.MSBu
 C:\Estudos\TarefasApi\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Estudos\TarefasApi\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Estudos\TarefasApi\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Estudos\TarefasApi\obj\Debug\net9.0\rpswa.dswa.cache.json
+C:\Estudos\TarefasApi\obj\Debug\net9.0\TarefasApi.sourcelink.json
+C:\Estudos\TarefasApi\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Estudos\TarefasApi\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Estudos\TarefasApi\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Estudos\TarefasApi\obj\Debug\net9.0\rjimswa.dswa.cache.json
+C:\Estudos\TarefasApi\obj\Debug\net9.0\rjsmrazor.dswa.cache.json
+C:\Estudos\TarefasApi\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json
+C:\Estudos\TarefasApi\obj\Debug\net9.0\staticwebassets.build.json.cache
+C:\Estudos\TarefasApi\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

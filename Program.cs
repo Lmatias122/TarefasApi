@@ -5,37 +5,27 @@ using TarefasApi.services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
-
+// Adiciona suporte a controllers (MVC)
 builder.Services.AddControllers();
 
+// Configura o DbContext com a string de conexão
 string? stringConnection = builder.Configuration.GetConnectionString("StringConexaoBanco");
-
 if (stringConnection is null)
     throw new Exception("A string de conexão definida é nula.");
 
-//Adicao ID dbcontext
-builder.Services.AddDbContext<TarefasApiContext>
-(
-    opt => opt.UseSqlServer(stringConnection)
-);
+builder.Services.AddDbContext<TarefasApiContext>(opt =>
+    opt.UseSqlServer(stringConnection));
 
-//Adicao ID service / repository
+// Injeta repositórios e serviços
 builder.Services.AddScoped<CategoriaRepository>();
 builder.Services.AddScoped<CategoriaService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
-
+// Middleware padrão
 app.UseHttpsRedirection();
 
+// Mapeia os controllers
 app.MapControllers();
 
 app.Run();
