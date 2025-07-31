@@ -14,9 +14,9 @@ public class CategoriaController(CategoriaService categoriaService) : Controller
     [HttpGet]
     public async Task<ActionResult<List<Categoria>>> Listar()
     {
-        List<Categoria> categorias = await categoriaService.ListarAsync();
+        List<Categoria> retorno = await categoriaService.ListarAsync();
 
-        return categorias;
+        return Ok(retorno);
     }
 
     [HttpPost]
@@ -26,18 +26,47 @@ public class CategoriaController(CategoriaService categoriaService) : Controller
         return retorno;
     }
 
+    [HttpGet("{Id}")]
+    public async Task<ActionResult<Categoria>> ObterPorID(int Id)
+    {
+        try
+        {
+            Categoria retorno = await categoriaService.ObterPorIDAsync(Id);
+            return Ok(retorno);
+        }
+        catch (Exception ex)
+        {
+            return NotFound(ex.Message);
+        }
+    }
+
     [HttpPut("{Id}")]
     public async Task<ActionResult> AlterarAsync(int id, [FromBody] Categoria categoria)
     {
-        await categoriaService.AlterarAsync(id, categoria);
-        return NoContent();
+        try
+        {
+            await categoriaService.AlterarAsync(id, categoria);
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+            return NotFound(ex.Message);
+        }
     }
+
 
     [HttpDelete("{id}")]
     public async Task<ActionResult> ExcluirAsync(int id)
     {
-        await categoriaService.ExcluirAsync(id);
-        return NoContent();
+        try
+        {
+            await categoriaService.ExcluirAsync(id);
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+            return NotFound(ex.Message);
+        }
     }
 }
 

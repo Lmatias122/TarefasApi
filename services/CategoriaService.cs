@@ -35,5 +35,15 @@ public class CategoriaService
     {
         await _categoriaRepository.ExcluirAsync(id);
     }
+
+    public async Task<Categoria> ObterPorIDAsync(int id)
+    {
+        Categoria? retorno = await _categoriaRepository.ObterPorIdAsync(id);
+        if (retorno is null)
+        {
+            throw new KeyNotFoundException($"Categoria com ID {id} não encontrada.");
+        }
+        return retorno;
+    }
 }
 

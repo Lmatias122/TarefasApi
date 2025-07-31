@@ -164,4 +164,3 @@ C:\Estudos\TarefasApi\obj\Debug\net9.0\rjimswa.dswa.cache.json
 C:\Estudos\TarefasApi\obj\Debug\net9.0\rjsmrazor.dswa.cache.json
 C:\Estudos\TarefasApi\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json
 C:\Estudos\TarefasApi\obj\Debug\net9.0\staticwebassets.build.json.cache
-C:\Estudos\TarefasApi\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
