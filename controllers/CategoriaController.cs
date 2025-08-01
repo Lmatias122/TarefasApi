@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Query.Internal;
+using TarefasApi.models;
 using TarefasApi.services;
 
 namespace TarefasApi.controllers;

@@ -1,4 +1,6 @@
-﻿using TarefasApi.repositories;
+﻿using TarefasApi.Dto;
+using TarefasApi.models;
+using TarefasApi.repositories;
 
 namespace TarefasApi.services;
 
@@ -13,6 +15,12 @@ public class TarefaService
     {
         Tarefa retorno = await _tarefaRepository.IncluirTarefaAsync(tarefa);
         return retorno;
+    }
+
+    public async Task<TarefasDto?> AtualizarStatusTarefaAsync(int id, AtualizarStatusTarefaDto dto)
+    {
+        TarefasDto tarefaDto = await _tarefaRepository.AtualizarStatusTarefaAsync(id, dto);
+        return tarefaDto;
     }
 }
 

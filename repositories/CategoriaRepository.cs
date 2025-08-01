@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using TarefasApi.data;
-
+using TarefasApi.models;
 namespace TarefasApi.repositories;
 
 public class CategoriaRepository

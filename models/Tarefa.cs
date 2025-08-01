@@ -1,4 +1,4 @@
-
+namespace TarefasApi.models;
 public enum Prioridade
 {
     Baixa,//0   
