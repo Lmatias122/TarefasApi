@@ -1,12 +1,19 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using TarefasApi.data;
+using TarefasApi.Mapping;
 using TarefasApi.repositories;
 using TarefasApi.services;
 
 var builder = WebApplication.CreateBuilder(args);
+ 
+
 
 // Adiciona suporte a controllers (MVC)
 builder.Services.AddControllers();
+
+
 
 // Configura o DbContext com a string de conexão
 string? stringConnection = builder.Configuration.GetConnectionString("StringConexaoBanco");
@@ -21,6 +28,13 @@ builder.Services.AddScoped<CategoriaRepository>();
 builder.Services.AddScoped<CategoriaService>();
 builder.Services.AddScoped<TarefaReposiory>();
 builder.Services.AddScoped<TarefaService>();
+
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.LicenseKey = builder.Configuration["AutoMapper:LicenseKey"];
+    cfg.AddProfile<MappingProfile>();
+
+},typeof(MappingProfile).Assembly);
 
 var app = builder.Build();
 
