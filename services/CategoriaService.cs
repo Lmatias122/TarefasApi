@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore;
 using TarefasApi.repositories;
+using TarefasApi.models;
 
 namespace TarefasApi.services;
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using TarefasApi.Dto;
 using TarefasApi.models;
 using TarefasApi.services;
@@ -7,15 +8,29 @@ namespace TarefasApi.controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class TarefaController(TarefaService tarefaService) : ControllerBase
+public class TarefaController(TarefaService tarefaService, IMapper _mapper) : ControllerBase
 {
     private readonly TarefaService tarefaService = tarefaService;
+    private readonly IMapper _mapper = _mapper;
 
     [HttpPost]
-    public async Task<ActionResult<Tarefa>> IncluirTarefaAsync([FromBody] Tarefa tarefa)
+    public async Task<ActionResult<TarefasDto>> CriarTarefaAsync([FromBody] CriarTarefaDto dto)
     {
-        Tarefa retorno = await tarefaService.IncluirTarefaAsync(tarefa);
-        return Ok(retorno);
+        var tarefa = _mapper.Map<Tarefa>(dto);
+        var tarefaCriada = await tarefaService.CriarTarefaAsync(tarefa);
+        return CreatedAtAction(nameof(DetalharTarefaPorId), new { id = tarefaCriada.Id }, tarefaCriada);
+
+    }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<TarefasDto>> DetalharTarefaPorId(int id)
+    {
+        var tarefa = await tarefaService.BuscarTarefaPorIdAsync(id);
+
+        if (tarefa == null)
+            return NotFound(new { mensagem = "Tarefa não encontrada." });
+
+        return Ok(tarefa);
     }
 
     [HttpPatch("{Id}")]
@@ -30,6 +45,13 @@ public class TarefaController(TarefaService tarefaService) : ControllerBase
         {
             return NotFound(ex.Message);
         }
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<List<TarefasDto>>> ListarTarefasAsync()
+    {
+        var tarefasDto = await tarefaService.ListarTarefasAsync();
+        return Ok(tarefasDto);
     }
 }
 

@@ -18,11 +18,16 @@ namespace TarefasApi.repositories
             _context = context;
             _mapper = mapper;
         }
-        public async Task<Tarefa> IncluirTarefaAsync(Tarefa tarefa)
+        public async Task CriarTarefaAsync(Tarefa tarefa)
         {
-            EntityEntry<Tarefa> retorno = await _context.Tarefas.AddAsync(tarefa);
+            await _context.Tarefas.AddAsync(tarefa);
             await _context.SaveChangesAsync();
-            return retorno.Entity;
+        }
+        public async Task<Tarefa?> ObterPorIdAsync(int id)
+        {
+            return await _context.Tarefas
+                .Include(t => t.Categoria) // opcional: se quiser incluir categoria
+                .FirstOrDefaultAsync(t => t.Id == id);
         }
 
         public async Task AlterarTarefasAsync(int id, Tarefa tarefa)
@@ -52,11 +57,17 @@ namespace TarefasApi.repositories
 
         }
 
-        public async Task<List<Tarefa>> ListarTarefasAsync() 
+        public async Task<List<TarefasDto>> ListarTarefasAsync()
         {
-            List<Tarefa> tarefas = await _context.Tarefas.ToListAsync();
-            return tarefas;
+            List<Tarefa> tarefas = await _context
+                .Tarefas
+                .Include(t => t.Categoria)
+                .AsNoTracking()
+                .ToListAsync();
+            return _mapper.Map<List<TarefasDto>>(tarefas);
         }
 
     }
+
 }
+

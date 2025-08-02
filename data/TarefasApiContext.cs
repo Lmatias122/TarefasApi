@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TarefasApi.models;
 
 namespace TarefasApi.data
 {

@@ -20,4 +20,7 @@ public class Tarefa
 
     public Categoria? Categoria { get; set; }
     public int CategoriaId { get; set; }
+
+    public Tarefa() { }
 }
+

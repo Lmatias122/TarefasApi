@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using TarefasApi.Dto.Categoria;
 
 namespace TarefasApi.Dto
 {
@@ -7,6 +8,6 @@ namespace TarefasApi.Dto
         public int Id { get; set; }
         public string Nome { get; set; } = string.Empty;
         public bool Concluida { get; set; }
-        public string Categoria { get; set; } = string.Empty;
+        public CategoriasDto Categoria { get; set; } 
     }
 }
