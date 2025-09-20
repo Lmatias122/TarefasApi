@@ -26,7 +26,7 @@ builder.Services.AddDbContext<TarefasApiContext>(opt =>
 // Injeta repositórios e serviços
 builder.Services.AddScoped<CategoriaRepository>();
 builder.Services.AddScoped<CategoriaService>();
-builder.Services.AddScoped<TarefaReposiory>();
+builder.Services.AddScoped<TarefaRepository>();
 builder.Services.AddScoped<TarefaService>();
 
 builder.Services.AddAutoMapper(cfg =>

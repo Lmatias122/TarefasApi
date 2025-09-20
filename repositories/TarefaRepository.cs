@@ -9,11 +9,11 @@ using TarefasApi.models;
 
 namespace TarefasApi.repositories
 {
-    public class TarefaReposiory
+    public class TarefaRepository
     {
         private readonly TarefasApiContext _context;
         private readonly IMapper _mapper;
-        public TarefaReposiory(TarefasApiContext context, IMapper mapper)
+        public TarefaRepository(TarefasApiContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -65,6 +65,17 @@ namespace TarefasApi.repositories
                 .AsNoTracking()
                 .ToListAsync();
             return _mapper.Map<List<TarefasDto>>(tarefas);
+        }
+
+        public async Task DeletaTarefaAsync(int id) 
+        {
+            var tarefa = await _context.Tarefas.FindAsync(id);
+            if (tarefa == null){
+                throw new KeyNotFoundException($"Tarefa com ID {id} não encontrada.");
+
+            }
+            _context.Tarefas.Remove(tarefa);
+            await _context.SaveChangesAsync();
         }
 
     }

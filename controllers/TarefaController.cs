@@ -53,5 +53,19 @@ public class TarefaController(TarefaService tarefaService, IMapper _mapper) : Co
         var tarefasDto = await tarefaService.ListarTarefasAsync();
         return Ok(tarefasDto);
     }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeletaTarefaAsync(int id)
+    {
+        try
+        {
+            await tarefaService.DeletaTarefaAsync(id);
+            return NoContent();
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(new { mensagem = ex.Message });
+        }
+    }
 }
 

@@ -7,16 +7,16 @@ namespace TarefasApi.services;
 
 public class TarefaService
 {
-    private readonly TarefaReposiory _tarefaRepository;
+    private readonly TarefaRepository _tarefaRepository;
 
     private readonly CategoriaRepository _categoriaRepository;
 
     private readonly IMapper _mapper;
-    public TarefaService(TarefaReposiory tarefaRepository, CategoriaRepository categoriaRepository, IMapper mapper)
+    public TarefaService(TarefaRepository tarefaRepository, CategoriaRepository categoriaRepository, IMapper mapper)
     {
         _tarefaRepository = tarefaRepository;
-       _categoriaRepository = categoriaRepository; 
-       _mapper = mapper;
+        _categoriaRepository = categoriaRepository;
+        _mapper = mapper;
     }
     public async Task <TarefasDto> CriarTarefaAsync(Tarefa tarefa)
     {
@@ -56,6 +56,19 @@ public class TarefaService
     {
         var tarefas = await _tarefaRepository.ListarTarefasAsync();
         return tarefas;
+    }
+
+    public async Task<bool> DeletaTarefaAsync(int id)
+    {
+        try
+        {
+            await _tarefaRepository.DeletaTarefaAsync(id);
+            return true;
+        }
+        catch (KeyNotFoundException)
+        {
+            return false;
+        }
     }
 }
 
