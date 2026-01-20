@@ -8,16 +8,22 @@ namespace TarefasApi.controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class TarefaController(TarefaService tarefaService, IMapper _mapper) : ControllerBase
+public class TarefaController : ControllerBase
 {
-    private readonly TarefaService tarefaService = tarefaService;
-    private readonly IMapper _mapper = _mapper;
+    private readonly TarefaService _tarefaService;
+    private readonly IMapper _mapper;
+
+    public TarefaController(TarefaService tarefaService, IMapper mapper)
+    {
+        _tarefaService = tarefaService;
+        _mapper = mapper;
+    }
 
     [HttpPost]
     public async Task<ActionResult<TarefasDto>> CriarTarefaAsync([FromBody] CriarTarefaDto dto)
     {
         var tarefa = _mapper.Map<Tarefa>(dto);
-        var tarefaCriada = await tarefaService.CriarTarefaAsync(tarefa);
+        var tarefaCriada = await _tarefaService.CriarTarefaAsync(tarefa);
         return CreatedAtAction(nameof(DetalharTarefaPorId), new { id = tarefaCriada.Id }, tarefaCriada);
 
     }
@@ -25,7 +31,7 @@ public class TarefaController(TarefaService tarefaService, IMapper _mapper) : Co
     [HttpGet("{id}")]
     public async Task<ActionResult<TarefasDto>> DetalharTarefaPorId(int id)
     {
-        var tarefa = await tarefaService.BuscarTarefaPorIdAsync(id);
+        var tarefa = await _tarefaService.BuscarTarefaPorIdAsync(id);
 
         if (tarefa == null)
             return NotFound(new { mensagem = "Tarefa não encontrada." });
@@ -38,7 +44,7 @@ public class TarefaController(TarefaService tarefaService, IMapper _mapper) : Co
     {
         try
         {
-            TarefasDto? atualizarStatus = await tarefaService.AtualizarStatusTarefaAsync(Id, dto);
+            TarefasDto? atualizarStatus = await _tarefaService.AtualizarStatusTarefaAsync(Id, dto);
             return Ok(atualizarStatus);
         }
         catch (Exception ex)
@@ -50,22 +56,15 @@ public class TarefaController(TarefaService tarefaService, IMapper _mapper) : Co
     [HttpGet]
     public async Task<ActionResult<List<TarefasDto>>> ListarTarefasAsync()
     {
-        var tarefasDto = await tarefaService.ListarTarefasAsync();
+        var tarefasDto = await _tarefaService.ListarTarefasAsync();
         return Ok(tarefasDto);
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeletaTarefaAsync(int id)
     {
-        try
-        {
-            await tarefaService.DeletaTarefaAsync(id);
-            return NoContent();
-        }
-        catch (KeyNotFoundException ex)
-        {
-            return NotFound(new { mensagem = ex.Message });
-        }
+        await _tarefaService.DeletaTarefaAsync(id);
+        return NoContent();
     }
 }
 

@@ -18,13 +18,13 @@ public class TarefaService
         _categoriaRepository = categoriaRepository;
         _mapper = mapper;
     }
-    public async Task <TarefasDto> CriarTarefaAsync(Tarefa tarefa)
+    public async Task<TarefasDto> CriarTarefaAsync(Tarefa tarefa)
     {
         if (string.IsNullOrWhiteSpace(tarefa.Nome))
             throw new Exception("O nome da tarefa não pode estar vazio.");
 
         var categoria = await _categoriaRepository.ObterPorIdAsync(tarefa.CategoriaId);
-        
+
         if (categoria == null)
         {
             throw new KeyNotFoundException($"Categoria com ID {tarefa.CategoriaId} não encontrada.");
@@ -58,17 +58,9 @@ public class TarefaService
         return tarefas;
     }
 
-    public async Task<bool> DeletaTarefaAsync(int id)
+    public async Task DeletaTarefaAsync(int id)
     {
-        try
-        {
-            await _tarefaRepository.DeletaTarefaAsync(id);
-            return true;
-        }
-        catch (KeyNotFoundException)
-        {
-            return false;
-        }
+        await _tarefaRepository.DeletaTarefaAsync(id);
     }
 }
 

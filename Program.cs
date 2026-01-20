@@ -38,6 +38,8 @@ builder.Services.AddAutoMapper(cfg =>
 
 var app = builder.Build();
 
+app.UseMiddleware<TarefasApi.Middleware.ErrorHandlingMiddleware>();
+app.UseMiddleware<TarefasApi.Middleware.RequestLoggingMiddleWare>();
 // Middleware padrão
 app.UseHttpsRedirection();
 

@@ -72,7 +72,6 @@ namespace TarefasApi.repositories
             var tarefa = await _context.Tarefas.FindAsync(id);
             if (tarefa == null){
                 throw new KeyNotFoundException($"Tarefa com ID {id} não encontrada.");
-
             }
             _context.Tarefas.Remove(tarefa);
             await _context.SaveChangesAsync();
