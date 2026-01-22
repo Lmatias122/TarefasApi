@@ -20,9 +20,16 @@ string? stringConnection = builder.Configuration.GetConnectionString("StringCone
 if (stringConnection is null)
     throw new Exception("A string de conexão definida é nula.");
 
-builder.Services.AddDbContext<TarefasApiContext>(opt =>
-    opt.UseSqlServer(stringConnection));
-
+if (builder.Environment.IsEnvironment("Testing"))
+{
+    builder.Services.AddDbContext<TarefasApiContext>(opt =>
+        opt.UseInMemoryDatabase("TarefasDb_Test"));
+}
+else
+{
+    builder.Services.AddDbContext<TarefasApiContext>(opt =>
+        opt.UseSqlServer(stringConnection));
+}
 // Injeta repositórios e serviços
 builder.Services.AddScoped<CategoriaRepository>();
 builder.Services.AddScoped<CategoriaService>();
