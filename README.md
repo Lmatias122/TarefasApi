@@ -134,7 +134,7 @@ DELETE /api/Tarefa/{id}
 ## 🛠 Como Executar
 
 ``` bash
-git clone <seu-repositorio>
+git clone <https://github.com/Lmatias122/TarefasApi.git>
 cd TarefasApi
 dotnet restore
 dotnet run
