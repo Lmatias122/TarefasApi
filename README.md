@@ -1,143 +1,170 @@
-# 📋 API de Tarefas
+# 📌 TarefasApi
 
-API RESTful desenvolvida em **ASP.NET Core** com **Entity Framework Core**, que permite o gerenciamento de tarefas e categorias.  
-Cada tarefa pertence a **uma categoria**, e uma categoria pode conter **várias tarefas**.
+API REST desenvolvida em **.NET 9** com foco na consolidação de
+fundamentos de backend.
 
----
+Mais do que um CRUD, este projeto foi construído para aprofundar
+conceitos essenciais como:
+
+-   Arquitetura em camadas (Controller, Service, Repository)
+-   Entity Framework Core e ciclo de vida do DbContext
+-   Middleware para logging e tratamento global de exceções
+-   Testes de integração com WebApplicationFactory
+-   Uso de EF Core InMemory para isolamento de banco em testes
+-   Uso correto de async/await
+
+------------------------------------------------------------------------
 
 ## 🚀 Tecnologias Utilizadas
 
-- ASP.NET Core 8
-- Entity Framework Core
-- SQL Server
-- Swagger (opcional)
-- Visual Studio / VS Code
+-   .NET 9
+-   ASP.NET Core Web API
+-   Entity Framework Core
+-   SQL Server
+-   EF Core InMemory (para testes)
+-   AutoMapper
+-   xUnit (testes)
+-   WebApplicationFactory
 
----
+------------------------------------------------------------------------
 
-## 📁 Estrutura do Projeto
+## 🏗 Arquitetura
 
-```
-📁 Models
-   ├── Tarefa.cs
-   └── Categoria.cs
-📁 Controllers
-   ├── TarefaController.cs
-   └── CategoriaController.cs
-📁 Data
-   └── AppDbContext.cs
-Program.cs
-```
+O projeto segue o padrão de separação por responsabilidades:
 
----
+### 📂 Controllers
 
-## ⚙️ Como Executar o Projeto
+Responsáveis por receber as requisições HTTP e retornar respostas
+adequadas.
 
-1. Clone este repositório:
-```bash
-git clone https://github.com/seu-usuario/api-tarefas.git
-cd api-tarefas
-```
+### 📂 Services
 
-2. Restaure os pacotes NuGet:
-```bash
+Camada de regras de negócio e orquestração da aplicação.
+
+### 📂 Repositories
+
+Responsável pelo acesso aos dados via Entity Framework.
+
+### 📂 Data
+
+Contém o DbContext e configurações do EF Core.
+
+### 📂 Middlewares
+
+Implementações para: - Logging de requisições - Tratamento global de
+exceções
+
+------------------------------------------------------------------------
+
+## 🔄 Fluxo de Requisição
+
+1.  A requisição passa pelos Middlewares
+2.  O Controller recebe a requisição
+3.  O Service executa a regra de negócio
+4.  O Repository acessa o banco via EF Core
+5.  A resposta retorna passando novamente pelos Middlewares
+
+------------------------------------------------------------------------
+
+## 🗄 Banco de Dados
+
+### Produção / Desenvolvimento
+
+Utiliza **SQL Server** configurado via connection string.
+
+### Testes
+
+Utiliza **EF Core InMemory Database** para:
+
+-   Evitar poluir o banco real
+-   Tornar os testes independentes
+-   Melhorar velocidade de execução
+
+------------------------------------------------------------------------
+
+## 🧪 Testes
+
+A aplicação possui **testes de integração** que validam:
+
+-   Pipeline completo da aplicação
+-   Middlewares
+-   Controllers
+-   Services
+-   Repositórios
+-   Integração com EF Core
+
+Tecnologias utilizadas:
+
+-   xUnit
+-   WebApplicationFactory
+-   EF Core InMemory
+
+Estrutura padrão de testes:
+
+-   Arrange
+-   Act
+-   Assert
+
+------------------------------------------------------------------------
+
+## 📌 Endpoints Principais
+
+### Criar tarefa
+
+POST /api/Tarefa
+
+### Listar tarefas
+
+GET /api/Tarefa
+
+### Buscar por ID
+
+GET /api/Tarefa/{id}
+
+### Atualizar tarefa
+
+PUT /api/Tarefa/{id}
+
+### Deletar tarefa
+
+DELETE /api/Tarefa/{id}
+
+------------------------------------------------------------------------
+
+## 🛠 Como Executar
+
+``` bash
+git clone <seu-repositorio>
+cd TarefasApi
 dotnet restore
-```
-
-3. Execute as migrações e crie o banco de dados:
-```bash
-dotnet ef database update
-```
-
-4. Inicie a aplicação:
-```bash
 dotnet run
 ```
 
-A API estará disponível em `https://localhost:5001` ou `http://localhost:5000`.
+A API estará disponível em:
 
----
+https://localhost:xxxx
 
-## 📌 Funcionalidades
+------------------------------------------------------------------------
 
-- ✅ Cadastro, edição e exclusão de tarefas
-- ✅ Marcar tarefas como concluídas
-- ✅ Atribuir categorias às tarefas
-- ✅ Filtrar tarefas por prioridade ou status
-- ✅ Visualizar tarefas de uma categoria específica
+## 📈 Melhorias Futuras
 
----
+-   Implementar autenticação e autorização
+-   Adicionar mensageria (RabbitMQ ou similar)
+-   Implementar logs estruturados
+-   Adicionar validações mais robustas
+-   Implementar paginação e filtros avançados
 
-## 🧪 Endpoints Principais
+------------------------------------------------------------------------
 
-| Método | Rota                        | Ação                        |
-|--------|-----------------------------|-----------------------------|
-| GET    | `/tarefas`                  | Listar todas as tarefas     |
-| GET    | `/tarefas/{id}`             | Buscar uma tarefa por ID    |
-| POST   | `/tarefas`                  | Criar nova tarefa           |
-| PUT    | `/tarefas/{id}`             | Atualizar uma tarefa        |
-| PATCH  | `/tarefas/{id}/concluir`    | Marcar como concluída       |
-| DELETE | `/tarefas/{id}`             | Deletar tarefa              |
-| GET    | `/categorias`               | Listar categorias           |
-| GET    | `/categorias/{id}/tarefas`  | Listar tarefas por categoria|
+## 🎯 Objetivo do Projeto
 
----
+Consolidar fundamentos de backend e boas práticas em .NET, priorizando:
 
-## 📝 Exemplo de JSON para Criar uma Tarefa
+-   Organização de código
+-   Clareza arquitetural
+-   Testabilidade
+-   Separação de responsabilidades
 
-```json
-{
-  "titulo": "Estudar EF Core",
-  "descricao": "Finalizar vídeo sobre migrations",
-  "concluida": false,
-  "prioridade": "Alta",
-  "prazo": "2025-08-10",
-  "categoriaId": 1
-}
-```
+------------------------------------------------------------------------
 
----
-
-## 📦 Pacotes Utilizados
-
-- `Microsoft.EntityFrameworkCore`
-- `Microsoft.EntityFrameworkCore.SqlServer`
-- `Microsoft.EntityFrameworkCore.Tools`
-- `Swashbuckle.AspNetCore` *(se usar Swagger)*
-
----
-
-## 👨‍💻 Autor
-
-Desenvolvido por **Leonardo Matias**  
-🔗 [GitHub](https://github.com/Lmatias122) • [LinkedIn](https://www.linkedin.com/in/leonardo-matias122/)
-
----
-
-## 📄 Licença
-
-Este projeto está licenciado sob a licença MIT.
-
-```
-MIT License
-
-Copyright (c) 2025 Leonardo Matias
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
+Desenvolvido para fins de estudo e aprimoramento contínuo.
